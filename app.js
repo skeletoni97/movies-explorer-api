@@ -1,6 +1,7 @@
 const express = require('express');
 // const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors, isCelebrateError } = require('celebrate');
 const { PORT, DATABASE_URL } = require('./config');
@@ -21,6 +22,7 @@ mongoose.connect(DATABASE_URL, {
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 app.use(requestLogger);
 
 app.use('/', require('./routes/index'));

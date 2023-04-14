@@ -23,9 +23,9 @@ mongoose.connect(DATABASE_URL, {
   });
 
 const app = express();
-app.use(helmet());
+// app.use(helmet());
 app.use(bodyParser.json());
-app.use(apiLimiter);
+// app.use(apiLimiter);
 app.use(cors());
 app.use(requestLogger);
 

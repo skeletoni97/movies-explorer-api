@@ -64,6 +64,7 @@ module.exports.createUser = (req, res, next) => {
         return next(new ConflictError(EMAIL_CONFLICT_ERROR));
       }
       if (err.name === 'ValidationError') {
+        console.log(err.name)
         return next(new BadRequestError(INVALID_USER_DATA_ERROR));
       }
       return next(err);

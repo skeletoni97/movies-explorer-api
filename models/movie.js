@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { validatorUrl } = require('../config');
+const { validatorUrl } = require('../utils/constant');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -63,10 +63,6 @@ const movieSchema = new mongoose.Schema({
   nameEN: {
     type: String,
     required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 

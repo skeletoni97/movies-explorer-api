@@ -1,12 +1,14 @@
 const express = require('express');
+const helmet = require('helmet');
 // const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const { errors, isCelebrateError } = require('celebrate');
+const { errors } = require('celebrate');
+const { apiLimiter } = require('./middlewares/rateLimiter');
 const { PORT, DATABASE_URL } = require('./config');
-const BadRequestError = require('./errors/BadRequestError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { errorHandler } = require('./middlewares/errors-handler');
 
 mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
@@ -21,7 +23,9 @@ mongoose.connect(DATABASE_URL, {
   });
 
 const app = express();
+app.use(helmet());
 app.use(bodyParser.json());
+app.use(apiLimiter);
 app.use(cors());
 app.use(requestLogger);
 
@@ -31,21 +35,7 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  let details;
-
-  if (isCelebrateError(err)) {
-    details = new BadRequestError(err.details.get('body'));
-  } else {
-    details = err;
-  }
-
-  const { statusCode = 500, message = 'На сервере произошла ошибка' } = details;
-  res.status(statusCode).send({
-    message,
-  });
-  next();
-});
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log('privet');

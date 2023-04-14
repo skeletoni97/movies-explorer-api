@@ -25,9 +25,30 @@ const validateCardId = celebrate({
 
 const validatePatchUserMe = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required(),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().email().required(),
   }),
 });
 
-module.exports = { validatePostMovies, validateCardId, validatePatchUserMe };
+const validateCreateUser = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+    name: Joi.string().min(2).max(30),
+  }),
+});
+
+const validateLogin = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  }),
+});
+
+module.exports = {
+  validatePostMovies,
+  validateCardId,
+  validatePatchUserMe,
+  validateLogin,
+  validateCreateUser,
+};

@@ -2,9 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 // const path = require('path');
-const {
-  celebrate, Joi,
-} = require('celebrate');
+const { validateLogin, validateCreateUser } = require('../middlewares/validation');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
 
@@ -12,20 +10,8 @@ const { login, createUser } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const NotFoundError = require('../errors/NotFoundError');
 
-router.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-  }),
-}), login);
-
-router.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
-  }),
-}), createUser);
+router.post('/signin', validateLogin, login);
+router.post('/signup', validateCreateUser, createUser);
 
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);

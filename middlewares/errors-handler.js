@@ -1,5 +1,7 @@
 const errorHandler = (err, req, res, next) => {
-  res.status(err.statusCode).send({ message: err.message });
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Внутренняя ошибка сервера';
+  res.status(statusCode).send({ message });
   next();
 };
 

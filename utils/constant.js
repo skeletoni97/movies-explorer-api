@@ -11,6 +11,13 @@ const INVALID_USER_DATA_ERROR = 'Переданы некорректные да�
 const EMAIL_CONFLICT_ERROR = 'Пользователь с таким email уже существует';
 const INCORRECT_EMAIL_OR_PASSWORD_ERROR = 'Неправильные пароль или почта';
 
+const AUTH_MESSAGE = 'Необходима авторизация';
+
+const PAGE_NOT_FOUND = 'Страница не найдена';
+
+const MONGODB_CONNECTED = 'Connected to MongoDB';
+const MONGODB_ERROR = 'Error connecting to MongoDB';
+
 const validatorUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 module.exports = {
@@ -25,4 +32,8 @@ module.exports = {
   INVALID_USER_DATA_ERROR,
   EMAIL_CONFLICT_ERROR,
   INCORRECT_EMAIL_OR_PASSWORD_ERROR,
+  AUTH_MESSAGE,
+  PAGE_NOT_FOUND,
+  MONGODB_CONNECTED,
+  MONGODB_ERROR,
 };

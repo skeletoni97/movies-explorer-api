@@ -9,23 +9,23 @@ const { apiLimiter } = require('./middlewares/rateLimiter');
 const { PORT, DATABASE_URL } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./middlewares/errors-handler');
+const { MONGODB_CONNECTED, MONGODB_ERROR } = require('./utils/constant');
 
 mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log(MONGODB_CONNECTED);
   })
   .catch((err) => {
-    console.error('Error connecting to MongoDB:', err);
+    console.error(MONGODB_ERROR, err);
     process.exit(1);
   });
 
 const app = express();
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(apiLimiter);
 app.use(cors());
 app.use(requestLogger);
 
@@ -36,7 +36,7 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use(errorHandler);
-
+app.use(apiLimiter);
 app.listen(PORT, () => {
   console.log('privet');
 });

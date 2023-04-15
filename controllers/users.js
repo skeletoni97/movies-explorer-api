@@ -64,7 +64,6 @@ module.exports.createUser = (req, res, next) => {
         return next(new ConflictError(EMAIL_CONFLICT_ERROR));
       }
       if (err.name === 'ValidationError') {
-        console.log(err.name)
         return next(new BadRequestError(INVALID_USER_DATA_ERROR));
       }
       return next(err);
@@ -82,6 +81,9 @@ module.exports.patchUserMe = (req, res, next) => {
       return res.send(user);
     })
     .catch((err) => {
+      if (err.code === 11000) {
+        return next(new ConflictError(EMAIL_CONFLICT_ERROR));
+      }
       if (err.name === 'ValidationError') {
         return next(new BadRequestError(INVALID_PROFILE_DATA_ERROR));
       }

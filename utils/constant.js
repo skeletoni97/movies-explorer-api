@@ -1,10 +1,13 @@
 // ошибки movies
+const INVALID_URL_ERROR = 'Некорректный URL';
 const INVALID_CARD_ID_ERROR = 'Передан некорректный _id карточки';
 const NONEXISTENT_CARD_ID_ERROR = 'Передан несуществующий _id карточки';
 const INSUFFICIENT_PERMISSIONS_ERROR = 'Недостаточно прав на удаление карточки';
 const CARD_DELETED_SUCCESSFULLY_MESSAGE = 'Успешно удалена';
 const INVALID_CARD_DATA_ERROR = 'Переданы некорректные данные при создании карточки';
+
 // ошибки users
+const INVALID_EMAIL_FORMAT_ERROR = 'Неправильный формат почты';
 const INVALID_PROFILE_DATA_ERROR = 'Переданы некорректные данные при обновлении профиля';
 const USER_NOT_FOUND_ERROR = 'Пользователь по указанному _id не найден';
 const INVALID_USER_DATA_ERROR = 'Переданы некорректные данные при создании пользователя';
@@ -18,9 +21,13 @@ const PAGE_NOT_FOUND = 'Страница не найдена';
 const MONGODB_CONNECTED = 'Connected to MongoDB';
 const MONGODB_ERROR = 'Error connecting to MongoDB';
 
+const INTERNAL_SERVER_ERROR = 'Внутренняя ошибка сервера.';
+
 const validatorUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 module.exports = {
+  INVALID_URL_ERROR,
+  INVALID_EMAIL_FORMAT_ERROR,
   INVALID_CARD_ID_ERROR,
   NONEXISTENT_CARD_ID_ERROR,
   INSUFFICIENT_PERMISSIONS_ERROR,
@@ -36,4 +43,5 @@ module.exports = {
   PAGE_NOT_FOUND,
   MONGODB_CONNECTED,
   MONGODB_ERROR,
+  INTERNAL_SERVER_ERROR,
 };

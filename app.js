@@ -28,6 +28,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(cors());
 app.use(requestLogger);
+app.use(apiLimiter);
 
 app.use('/', require('./routes/index'));
 
@@ -36,7 +37,7 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use(errorHandler);
-app.use(apiLimiter);
+
 app.listen(PORT, () => {
   console.log('privet');
 });
